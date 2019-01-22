@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
     
     var userManager = SMAuthProfileManager()
     
+    let dbFirebase = Firestore.firestore()
+    
     static func instantiate() -> LoginViewController {
         let controller = LoginViewController()
         controller.view.backgroundColor = .white
@@ -34,6 +36,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let settings = dbFirebase.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        dbFirebase.settings = settings
         
         view.addSubview(stackViewContainer)
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -53,9 +59,30 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         
         SVProgressHUD.show()
-        if let _ = userManager.getFirebaseUser() {
+        if let user = userManager.getFirebaseUser() {
             SVProgressHUD.dismiss()
-            launchMainTabbar()
+            dbFirebase.collection("users").document(user.uid).getDocument { [weak self] (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    self?.launchMainTabbar()
+                } else {
+                    print("Document does not exist")
+                    self?.dbFirebase.collection("users").document(user.uid).setData([
+                        "email": user.email ?? "",
+                        "name": user.displayName ?? "",
+                        "photo": user.photoURL?.absoluteString ?? "",
+                        "create_at": Timestamp()
+                        ], completion: { (err) in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document added")
+                                self?.launchMainTabbar()
+                            }
+                    })
+                }
+            }
         } else {
             SVProgressHUD.dismiss()
         }
@@ -77,6 +104,20 @@ class LoginViewController: UIViewController {
 extension LoginViewController: GIDSignInUIDelegate { }
 extension LoginViewController: SMAuthProfileManagerSignInGoogle {
     func smAuthProfileManagerSignInGoogle(didSuccessAndRegistered user: User?, googleUser: GIDGoogleUser) {
+        if let user = user {
+            dbFirebase.collection("users").document(user.uid).setData([
+                "email": user.email ?? "",
+                "name": user.displayName ?? "",
+                "photo": user.photoURL?.absoluteString ?? "",
+                "create_at": Timestamp()
+                ], completion: { (err) in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added")
+                    }
+            })
+        }
         SVProgressHUD.dismiss()
         launchMainTabbar()
     }

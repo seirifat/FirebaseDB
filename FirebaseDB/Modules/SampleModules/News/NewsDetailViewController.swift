@@ -11,6 +11,7 @@ import UIKit
 class NewsDetailViewController: SMScrollViewController {
     
     lazy var labelTitle = SMHeadingLabel()
+    lazy var labelWriter = SMNormalLabel()
     lazy var labelDate = SMSubLabel()
     lazy var labelDesc = SMNormalLabel()
     lazy var buttonShare: UIButton = {
@@ -45,6 +46,7 @@ class NewsDetailViewController: SMScrollViewController {
         setupParallaxHeader(image: UIImage(named: "ic_mountain"), contentMode: .scaleAspectFill, mode: MXParallaxHeaderMode.fill, scrollNavAlpha: true)
         
         labelTitle.text = "Hujan Turun di Awal Pagi"
+        labelWriter.text = "Retset"
         labelDate.text = "3 Desember 2010"
         labelDesc.numberOfLines = 0
         labelDesc.lineBreakMode = .byWordWrapping
@@ -66,7 +68,7 @@ class NewsDetailViewController: SMScrollViewController {
         
         stackViewButtonShareWrapper.addArrangedSubview(buttonShare)
         
-        smContainer.stackViewContainer.addArrangedSubViews(views: [stackViewButtonShareWrapper, labelTitle, labelDate, labelDesc])
+        smContainer.stackViewContainer.addArrangedSubViews(views: [stackViewButtonShareWrapper, labelTitle, labelWriter, labelDate, labelDesc])
     }
     
     override func viewDidAppear(_ animated: Bool) {
