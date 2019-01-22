@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         
         buttonLoginGoogle.addTarget(self, action: #selector(buttonLoginGooglePressed), for: .touchUpInside)
         
+        GIDSignIn.sharedInstance().uiDelegate = self
         userManager.signInGoogleDelegate = self
     }
     
@@ -73,6 +74,7 @@ class LoginViewController: UIViewController {
     
 }
 
+extension LoginViewController: GIDSignInUIDelegate { }
 extension LoginViewController: SMAuthProfileManagerSignInGoogle {
     func smAuthProfileManagerSignInGoogle(didSuccessAndRegistered user: User?, googleUser: GIDGoogleUser) {
         SVProgressHUD.dismiss()

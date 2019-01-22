@@ -36,7 +36,6 @@ class SMAuthProfileManager: NSObject {
     override init() {
         super.init()
         
-        GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance()?.delegate = self
     }
     
@@ -82,7 +81,6 @@ class SMAuthProfileManager: NSObject {
     
 }
 
-extension SMAuthProfileManager: GIDSignInUIDelegate { }
 extension SMAuthProfileManager: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
@@ -100,10 +98,6 @@ extension SMAuthProfileManager: GIDSignInDelegate {
                     self?.signInGoogleDelegate?.smAuthProfileManagerSignInGoogle(didFailed: error)
                     return
                 }
-                print(resultUser?.user.uid ?? "-")
-                print(resultUser?.user.displayName ?? "-")
-                print(resultUser?.user.phoneNumber ?? "-")
-                print(resultUser?.user.photoURL ?? "-")
                 self?.signInGoogleDelegate?.smAuthProfileManagerSignInGoogle(didSuccessAndRegistered: resultUser?.user, googleUser: user)
             }
         } else {
