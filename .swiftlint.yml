@@ -1,0 +1,337 @@
+#disabled_rules: # rule identifiers to exclude from running
+#  - trailing_whitespace
+#  - line_length
+#  - force_cast
+#  - redundant_optional_initialization
+  
+#included: # paths to include during linting. `--path` is ignored if present.
+  
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+  - FirebaseDB/Externals
+  - FirebaseDB/Extensions
+  - FirebaseDB/Helpers
+  - FirebaseDB/Utilities
+  - FirebaseDBTests
+
+whitelist_rules:
+  - identifier_name
+  - type_name
+  - colon
+  - comma
+  - operator_whitespace
+  - operator_usage_whitespace
+  - return_arrow_whitespace
+  - mark
+  - private_action
+  - private_outlet
+  - private_over_fileprivate
+  - redundant_string_enum_value
+  - redundant_type_annotation
+  - custom_rules
+    
+line_length:
+    warning: 150
+    error: 200
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+function_parameter_count:
+    warning: 6
+    error: 8
+reporter: "xcode"
+
+custom_rules:
+    # suitmobile
+    
+    # class and protocol
+    sm_presenter_name:
+        name: "Presenter Name"
+        regex: '(class)\s+(\w+(?<!Presenter)|[^A-Z]\w*Presenter)\s*(\:)\s*(Base|\w+)Presenter\s*\{'
+        message: "Subclass harus berakhiran 'Presenter'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_viewcontroller_name:
+        name: "ViewController Name"
+        regex: '(class)\s+(\w+(?<!ViewController)|[^A-Z]\w*ViewController)\s*(\:)\s*(UI|\w+)ViewController\s*\{'
+        message: "Subclass harus berakhiran 'ViewController'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_tabbarcontroller_name:
+        name: "TabBarController Name"
+        regex: '(class)\s+(\w+(?<!TabBarController)|[^A-Z]\w*TabBarController)\s*(\:)\s*(UI|\w+)TabBarController\s*\{'
+        message: "Subclass harus berakhiran 'TabBarController'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_view_name:
+        name: "UIView Name"
+        regex: '(class)\s+(\w+(?<!View)|[^A-Z]\w*View)\s*(\:)\s*(UI|(?!UI)\w+)View\s*\{'
+        message: "Subclass harus berakhiran 'View'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_label_name:
+        name: "UILabel Name"
+        regex: '(class)\s+(\w+(?<!Label)|[^A-Z]\w*Label)\s*(\:)\s*(UI|\w+)Label\s*\{'
+        message: "Subclass harus berakhiran 'Label'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_image_name:
+        name: "UIImage Name"
+        regex: '(class)\s+(\w+(?<!Image)|[^A-Z]\w*Image)\s*(\:)\s*(UI|\w+)Image\s*\{'
+        message: "Subclass harus berakhiran 'Image'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_textfield_name:
+        name: "UITextField Name"
+        regex: '(class)\s+(\w+(?<!TextField)|[^A-Z]\w*TextField)\s*(\:)\s*(UI|\w+)TextField\s*\{'
+        message: "Subclass harus berakhiran 'TextField'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_textview_name:
+        name: "UITextView Name"
+        regex: '(class)\s+(\w+(?<!TextView)|[^A-Z]\w*TextView)\s*(\:)\s*(UI|\w+)TextView\s*\{'
+        message: "Subclass harus berakhiran 'TextView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_imageview_name:
+        name: "UIImageView Name"
+        regex: '(class)\s+(\w+(?<!ImageView)|[^A-Z]\w*ImageView)\s*(\:)\s*(UI|\w+)ImageView\s*\{'
+        message: "Subclass harus berakhiran 'ImageView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_scrollview_name:
+        name: "UIScrollView Name"
+        regex: '(class)\s+(\w+(?<!ScrollView)|[^A-Z]\w*ScrollView)\s*(\:)\s*(UI|\w+)ScrollView\s*\{'
+        message: "Subclass harus berakhiran 'ScrollView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_tableview_name:
+        name: "UITableView Name"
+        regex: '(class)\s+(\w+(?<!TableView)|[^A-Z]\w*TableView)\s*(\:)\s*(UI|\w+)TableView\s*\{'
+        message: "Subclass harus berakhiran 'TableView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_collectionview_name:
+        name: "UICollectionView Name"
+        regex: '(class)\s+(\w+(?<!CollectionView)|[^A-Z]\w*CollectionView)\s*(\:)\s*(UI|\w+)CollectionView\s*\{'
+        message: "Subclass harus berakhiran 'CollectionView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_stackview_name:
+        name: "UIStackView Name"
+        regex: '(class)\s+(\w+(?<!StackView)|[^A-Z]\w*StackView)\s*(\:)\s*(UI|\w+)StackView\s*\{'
+        message: "Subclass harus berakhiran 'StackView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_webview_name:
+        name: "UIWebView Name"
+        regex: '(class)\s+(\w+(?<!WebView)|[^A-Z]\w*WebView)\s*(\:)\s*(WK|UI|\w+)WebView\s*\{'
+        message: "Subclass harus berakhiran 'WebView'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    
+    # identifier
+    sm_presenterprotocol_identifier:
+        name: "Presenter Protocol Identifier"
+        regex: '(var|let)\s+((?!view)\w*|view\w)\s*(\=|\:)\s*(\w*PresenterProtocol)\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'view'"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_presenter_identifier:
+        name: "Presenter Identifier"
+        regex: '(var|let)\s+((?!presenter)\w+|presenter[a-z0-9\_]\w*)\s*(\=|\:)\s*\w+Presenter\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'presenter' atau berawalan 'presenter' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_button_identifier:
+        name: "Button Identifier"
+        regex: '(var|let)\s+(button|(?!button)\w+|button[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)Button\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'button' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_label_identifier:
+        name: "Label Identifier"
+        regex: '(var|let)\s+(label|(?!label)\w+|label[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)Label\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'label' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_textfield_identifier:
+        name: "TextField Identifier"
+        regex: '(var|let)\s+(textField|(?!textField)\w+|textField[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)TextField\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'textField' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_textview_identifier:
+        name: "TextView Identifier"
+        regex: '(var|let)\s+(textView|(?!textView)\w+|textView[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)TextView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'textView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_imageview_identifier:
+        name: "ImageView Identifier"
+        regex: '(var|let)\s+(imageView|(?!imageView)\w+|imageView[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)ImageView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'imageView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_view_identifier:
+        name: "View Identifier"
+        regex: '(var|let)\s+(view|(?!view)\w+|view[^A-Z]\w*)\s*(\=|\:)\s*(UIView|(?!UI|\w*(SMContainer|Table|Collection|Web|Stack|Scroll|Image|Text))[A-Z]\w*View)\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'view' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_image_identifier:
+        name: "Image Identifier"
+        regex: '(var|let)\s+(image|(?!image)\w+|image[^A-Z]\w*)\s*(\=|\:)\s*(UI|\w+)Image\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'image' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_stackview_identifier:
+        name: "StackView Identifier"
+        regex: '(var|let)\s+((?!stackView)\w+|stackView[a-z0-9\_]\w*)\s*(\=|\:)\s*(UI|\w+)StackView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'stackView' atau berawalan 'stackView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_tableview_identifier:
+        name: "TableView Identifier"
+        regex: '(var|let)\s+((?!tableView)\w+|tableView[a-z0-9\_]\w*)\s*(\=|\:)\s*(UI|\w+)TableView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'tableView' atau berawalan 'tableView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_collectionview_identifier:
+        name: "CollectionView Identifier"
+        regex: '(var|let)\s+((?!collectionView)\w+|collectionView[a-z0-9\_]\w*)\s*(\=|\:)\s*(UI|\w+)CollectionView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'collectionView' atau berawalan 'collectionView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_scrollview_identifier:
+        name: "ScrollView Identifier"
+        regex: '(var|let)\s+((?!scrollView)\w+|scrollView[a-z0-9\_]\w*)\s*(\=|\:)\s*(UI|[A-Z]\w+)ScrollView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'scrollView' atau berawalan 'scrollView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_webview_identifier:
+        name: "WebView Identifier"
+        regex: '(var|let)\s+((?!webView)\w+|webView[a-z0-9\_]\w*)\s*(\=|\:)\s*(UI|WK|\w+)WebView\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus 'webView' atau berawalan 'webView' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+    sm_layoutconstraint_identifier:
+        name: "LayoutConstraint Identifier"
+        regex: '(var|let)\s+(constraint|(?!constraint)\w+|constraint[^A-Z]+\w*)\s*(\=|\:)\s*NSLayoutConstraint\s*(\?|\!|\(|\=|\.)'
+        message: "Identifier harus berawalan 'constraint' dan camelCase"
+        severity: error
+        match_kinds: 
+          - typeidentifier
+          - identifier
+          - keyword
+          
+    # dari internet (https://github.com/realm/SwiftLint/issues/602)
+    comments_space:
+        name: "Space After Comment"
+        regex: '(^ *\/\/\w+)'
+        message: "There should be a space after //"
+        severity: warning
+    empty_first_line:
+        name: "Empty First Line"
+        regex: '(^[ a-zA-Z ]*(?:class) (?!(?:var|let))[ a-zA-Z:]*\{\n *\S+)'
+        message: "There should be an empty line after a declaration"
+        severity: error
+    empty_line_after_guard:
+        name: "Empty Line After Guard"
+        regex: '(^ *guard[ a-zA-Z0-9=?.\(\),><!]*\{[ a-zA-Z0-9=?.\(\),><!]*\}\n *(?!(?:return|guard))\S+)'
+        message: "There should be an empty line after a guard"
+        severity: error
+    empty_line_after_super:
+        name: "Empty Line After Super"
+        regex: '(^ *super\.[ a-zA-Z0-9=?.\(\)\{\}:,><!]*\n *(?!(?:\}|return))\S+)'
+        message: "There should be an empty line after super"
+        severity: error
+    multiple_empty_lines:
+        name: "Multiple Empty Lines"
+        regex: '((?:\s*\n){3,})'
+        message: "There are too many line breaks"
+        severity: error
