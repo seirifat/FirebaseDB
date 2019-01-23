@@ -15,6 +15,11 @@
 		EF06DBAD21C9E9B000661B8B /* LaunchHandlerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06DBAC21C9E9B000661B8B /* LaunchHandlerViewController.swift */; };
 		EF06DBB121C9FA7300661B8B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF06DBB021C9FA7300661B8B /* MainTabBarController.swift */; };
 		EF094C1021E4ACE6002A13DC /* SMTapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF094C0F21E4ACE6002A13DC /* SMTapGesture.swift */; };
+		EF1E1FD621F8438E008450E7 /* NewsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E1FD521F8438E008450E7 /* NewsListPresenter.swift */; };
+		EF1E1FD821F84469008450E7 /* UserFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E1FD721F84469008450E7 /* UserFirebase.swift */; };
+		EF1E1FDA21F84705008450E7 /* ArticleFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E1FD921F84705008450E7 /* ArticleFirebase.swift */; };
+		EF1E1FDC21F848D1008450E7 /* SMEngineServiceFirebaseDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E1FDB21F848D1008450E7 /* SMEngineServiceFirebaseDb.swift */; };
+		EF1E1FDE21F849D3008450E7 /* FirebasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1E1FDD21F849D3008450E7 /* FirebasePresenter.swift */; };
 		EF2AA35721E5D43E000F1783 /* SMCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2AA35621E5D43E000F1783 /* SMCollectionViewController.swift */; };
 		EF2AA35A21E5DC32000F1783 /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2AA35821E5DC32000F1783 /* EditProfileViewController.xib */; };
 		EF2AA35B21E5DC32000F1783 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2AA35921E5DC32000F1783 /* EditProfileViewController.swift */; };
@@ -121,6 +126,11 @@
 		EF06DBAC21C9E9B000661B8B /* LaunchHandlerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchHandlerViewController.swift; sourceTree = "<group>"; };
 		EF06DBB021C9FA7300661B8B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		EF094C0F21E4ACE6002A13DC /* SMTapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTapGesture.swift; sourceTree = "<group>"; };
+		EF1E1FD521F8438E008450E7 /* NewsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListPresenter.swift; sourceTree = "<group>"; };
+		EF1E1FD721F84469008450E7 /* UserFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebase.swift; sourceTree = "<group>"; };
+		EF1E1FD921F84705008450E7 /* ArticleFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleFirebase.swift; sourceTree = "<group>"; };
+		EF1E1FDB21F848D1008450E7 /* SMEngineServiceFirebaseDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMEngineServiceFirebaseDb.swift; sourceTree = "<group>"; };
+		EF1E1FDD21F849D3008450E7 /* FirebasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePresenter.swift; sourceTree = "<group>"; };
 		EF2AA35621E5D43E000F1783 /* SMCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMCollectionViewController.swift; sourceTree = "<group>"; };
 		EF2AA35821E5DC32000F1783 /* EditProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
 		EF2AA35921E5DC32000F1783 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +333,7 @@
 				EF46905021C8D6500014C78D /* NewsListViewController.swift */,
 				EFA1A92921CA3BFE0026B010 /* NewsDetailViewController.swift */,
 				EF46905221C8DCF00014C78D /* NewsCell.swift */,
+				EF1E1FD521F8438E008450E7 /* NewsListPresenter.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -416,6 +427,8 @@
 				EFA0C64A2161FF6C008EDE1A /* SMEngineService.swift */,
 				EFA0C64C21620106008EDE1A /* SMEngineServiceExtensions.swift */,
 				EF05EE4521F6EC1200AF07BA /* SMAuthProfileManager.swift */,
+				EF1E1FDB21F848D1008450E7 /* SMEngineServiceFirebaseDb.swift */,
+				EF1E1FDD21F849D3008450E7 /* FirebasePresenter.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -549,6 +562,8 @@
 			children = (
 				EFE6020C21647FC700ED2C81 /* Owner.swift */,
 				EFE6020D21647FC700ED2C81 /* Repo.swift */,
+				EF1E1FD721F84469008450E7 /* UserFirebase.swift */,
+				EF1E1FD921F84705008450E7 /* ArticleFirebase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -872,6 +887,7 @@
 				EFA0C6AA21620207008EDE1A /* AlertHelper.swift in Sources */,
 				EFA0C6472161F680008EDE1A /* BaseURL.swift in Sources */,
 				EFA0C693216201E9008EDE1A /* MXSegmentedPager.m in Sources */,
+				EF1E1FDC21F848D1008450E7 /* SMEngineServiceFirebaseDb.swift in Sources */,
 				EFA0C665216201BB008EDE1A /* DateExtension.swift in Sources */,
 				EF06DBAD21C9E9B000661B8B /* LaunchHandlerViewController.swift in Sources */,
 				EFDBFAFD21C485F200AE25C3 /* SMButton.swift in Sources */,
@@ -893,6 +909,8 @@
 				EFA0C6A821620207008EDE1A /* ViewManager.swift in Sources */,
 				EFA0C679216201BB008EDE1A /* UIApplicationExtension.swift in Sources */,
 				EF05EE4321F6D3EF00AF07BA /* LoginViewController.swift in Sources */,
+				EF1E1FDA21F84705008450E7 /* ArticleFirebase.swift in Sources */,
+				EF1E1FDE21F849D3008450E7 /* FirebasePresenter.swift in Sources */,
 				EFA0C670216201BB008EDE1A /* UITableViewExtensions.swift in Sources */,
 				EFA0C68F216201E9008EDE1A /* MXPagerViewController.m in Sources */,
 				EFBA965221C49139005ED9BE /* SMButtonSecondary.swift in Sources */,
@@ -919,6 +937,7 @@
 				EFA0C6AB21620207008EDE1A /* AnalyticsHelper.swift in Sources */,
 				EFA0C66B216201BB008EDE1A /* UIButtonExtensions.swift in Sources */,
 				EFA0C66C216201BB008EDE1A /* UIImageViewExtension.swift in Sources */,
+				EF1E1FD621F8438E008450E7 /* NewsListPresenter.swift in Sources */,
 				EFA0C666216201BB008EDE1A /* MXSegmentedPagerController+Extensions.swift in Sources */,
 				EFA0C672216201BB008EDE1A /* UIViewController+Extensions.swift in Sources */,
 				EFA0C6B521620207008EDE1A /* ControllerManager.swift in Sources */,
@@ -941,6 +960,7 @@
 				EF46905321C8DCF00014C78D /* NewsCell.swift in Sources */,
 				EF05EE4621F6EC1200AF07BA /* SMAuthProfileManager.swift in Sources */,
 				EFA0C6AE21620207008EDE1A /* ShareManager.swift in Sources */,
+				EF1E1FD821F84469008450E7 /* UserFirebase.swift in Sources */,
 				EFA0C678216201BB008EDE1A /* UITextViewExtension.swift in Sources */,
 				EF81C16821C7A30A00483FAA /* UITextFieldExtension.swift in Sources */,
 				EF2AA36321E5DEF3000F1783 /* ProfileItemCell.swift in Sources */,
