@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseProtocol {
+protocol BaseViewProtocol {
     func showData()
     func showError(error: Error?)
 }

@@ -40,6 +40,16 @@ class NewsCell: UITableViewCell {
         return wrapper
     }()
     
+    var article: ArticleFirebase? {
+        didSet {
+            if let article = article {
+                labelTitle.text = article.title ?? "-"
+                labelSubTitle.text = article.writter?.name ?? "-"
+                labelDate.text = article.date?.toColloquialString() ?? "-"
+            }
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

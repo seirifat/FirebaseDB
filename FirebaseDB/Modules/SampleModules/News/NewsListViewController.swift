@@ -8,20 +8,32 @@
 
 import UIKit
 import TPKeyboardAvoiding
+import Firebase
 
 class NewsListViewController: UIViewController {
 
     var tableView: TPKeyboardAvoidingTableView!
     
-    static func instantiate() -> NewsListViewController {
+    let dbFirebase = Firestore.firestore()
+    var listener: ListenerRegistration!
+    
+    var singleView = false
+    var isHasNav = false
+    
+    var presenter = NewsListPresenter()
+    
+    static func instantiate(isSingleView: Bool = false) -> NewsListViewController {
 //        let controller = UIStoryboard.sample.instantiateViewController(withIdentifier: self.className()) as! NewsListViewController
 //        return controller
         let controller = NewsListViewController()
+        controller.singleView = isSingleView
         return controller
     }
     
-    static func instantiateNav() -> UINavigationController {
+    static func instantiateNav(isSingleView: Bool = false) -> UINavigationController {
         let controller = UIStoryboard.sample.instantiateViewController(withIdentifier: self.className()) as! NewsListViewController
+        controller.singleView = isSingleView
+        controller.isHasNav = true
         let nav = ViewManager.createNavigationController(rootController: controller, transparent: false)
         return nav
     }
@@ -38,6 +50,36 @@ class NewsListViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         self.loadViewIfNeeded()
+        
+        if isHasNav {
+            setupBackBarButtonItems()
+        }
+        
+        presenter.view = self
+        presenter.setDataListener()
+        
+//        if singleView {
+//            listener = dbFirebase.collection("articles").whereField("writter.id", isEqualTo: "").addSnapshotListener { (querySnapshot, error) in
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//                documents.forEach({ (snapshot) in
+//                    print(snapshot.data())
+//                })
+//            }
+//        } else {
+//            listener = dbFirebase.collection("articles").addSnapshotListener { (querySnapshot, error) in
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//                documents.forEach({ (snapshot) in
+//                    print(snapshot.data())
+//                    print(snapshot.documentID)
+//                })
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,16 +88,23 @@ class NewsListViewController: UIViewController {
         self.parent?.title = "News"
         self.setSolidNavbarWith(color: UIColor(hexString: "#SMUITheme.primaryColor") ?? .blue)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        presenter.removeListener()
+    }
 
 }
 
 extension NewsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return presenter.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.className(), for: indexPath) as! NewsCell
+        cell.article = presenter.data[indexPath.row]
         return cell
     }
 }
@@ -65,5 +114,15 @@ extension NewsListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = NewsDetailViewController.instantiate()
         pushController(controller: controller, withbackTitle: " ", animated: true, color: .white)
+    }
+}
+
+extension NewsListViewController: BaseViewProtocol {
+    func showData() {
+        tableView.reloadData()
+    }
+    
+    func showError(error: Error?) {
+        print(error?.localizedDescription ?? "")
     }
 }

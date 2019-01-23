@@ -73,11 +73,11 @@ class LoginViewController: UIViewController {
         
         SVProgressHUD.show()
         if let user = userManager.getFirebaseUser() {
-            SVProgressHUD.dismiss()
             dbFirebase.collection("users").document(user.uid).getDocument { [weak self] (document, error) in
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
+//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data: \(dataDescription)")
+                    SVProgressHUD.dismiss()
                     self?.launchMainTabbar()
                 } else {
                     print("Document does not exist")
@@ -89,8 +89,10 @@ class LoginViewController: UIViewController {
                         ], completion: { (err) in
                             if let err = err {
                                 print("Error adding document: \(err)")
+                                SVProgressHUD.showError(withStatus: err.localizedDescription)
                             } else {
                                 print("Document added")
+                                SVProgressHUD.dismiss()
                                 self?.launchMainTabbar()
                             }
                     })
@@ -122,22 +124,36 @@ class LoginViewController: UIViewController {
 extension LoginViewController: GIDSignInUIDelegate { }
 extension LoginViewController: SMAuthProfileManagerSignInGoogle {
     func smAuthProfileManagerSignInGoogle(didSuccessAndRegistered user: User?, googleUser: GIDGoogleUser) {
-        if let user = user {
-            dbFirebase.collection("users").document(user.uid).setData([
-                "email": user.email ?? "",
-                "name": user.displayName ?? "",
-                "photo": user.photoURL?.absoluteString ?? "",
-                "create_at": Timestamp()
-                ], completion: { (err) in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document added")
-                    }
-            })
+        SVProgressHUD.show()
+        if let user = userManager.getFirebaseUser() {
+            dbFirebase.collection("users").document(user.uid).getDocument { [weak self] (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    print("Document data: \(dataDescription)")
+                    SVProgressHUD.dismiss()
+                    self?.launchMainTabbar()
+                } else {
+                    print("Document does not exist")
+                    self?.dbFirebase.collection("users").document(user.uid).setData([
+                        "email": user.email ?? "",
+                        "name": user.displayName ?? "",
+                        "photo": user.photoURL?.absoluteString ?? "",
+                        "create_at": Timestamp()
+                        ], completion: { (err) in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                                SVProgressHUD.showError(withStatus: err.localizedDescription)
+                            } else {
+                                print("Document added")
+                                SVProgressHUD.dismiss()
+                                self?.launchMainTabbar()
+                            }
+                    })
+                }
+            }
+        } else {
+            SVProgressHUD.dismiss()
         }
-        SVProgressHUD.dismiss()
-        launchMainTabbar()
     }
     
     func smAuthProfileManagerSignInGoogle(didSuccess user: GIDGoogleUser) {
