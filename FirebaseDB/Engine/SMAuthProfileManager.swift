@@ -59,7 +59,14 @@ class SMAuthProfileManager: NSObject {
         return Auth.auth().currentUser
     }
     
-    func logoutGoogle() {
+    func signOut() {
+        signOutGoogle()
+        signOutFacebook()
+    }
+    
+    func signOutGoogle() {
+        GIDSignIn.sharedInstance()?.signOut()
+        
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
