@@ -33,6 +33,9 @@ target 'FirebaseDB' do
     pod 'Firebase/Auth'
     pod 'GoogleSignIn'
 
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    
     # Pods for FirebaseDB
     
     target 'FirebaseDBTests' do

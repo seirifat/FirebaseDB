@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FacebookCore
+import FacebookLogin
 
 protocol SMAuthProfileManagerSignInGoogle {
     func smAuthProfileManagerSignInGoogle(didSuccess user: GIDGoogleUser)
@@ -22,7 +24,9 @@ protocol SMAuthProfileManagerGoogleProfile {
 }
 
 protocol SMAuthProfileManagerSignInFacebook {
-    
+    func smAuthProfileManagerSignInFacebook(didSuccess user: User, accessToken: AccessToken)
+    func smAuthProfileManagerSignInFacebook(didCancelled loginResult: LoginResult)
+    func smAuthProfileManagerSignInFacebook(didFailed error: Error)
 }
 
 class SMAuthProfileManager: NSObject {
@@ -78,6 +82,41 @@ class SMAuthProfileManager: NSObject {
     }
     
     // MARK: Facebook
+    
+    func signInWithFacebook(in controller: UIViewController) {
+        let loginManager = LoginManager()
+        loginManager.logIn(readPermissions: [.publicProfile, .email], viewController: controller, completion: { [weak self] loginResult in
+            guard let self = self else { return }
+            
+            switch loginResult {
+            case .failed(let error):
+                self.signInFacebookDelegate?.smAuthProfileManagerSignInFacebook(didFailed: error)
+            case .cancelled:
+                self.signInFacebookDelegate?.smAuthProfileManagerSignInFacebook(didCancelled: loginResult)
+            case .success( _, _, let accessToken):
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.authenticationToken)
+                Auth.auth().signInAndRetrieveData(with: credential) { [weak self] (authResult, error) in
+                    guard let self = self else { return }
+                    
+                    if let error = error {
+                        self.signInFacebookDelegate?.smAuthProfileManagerSignInFacebook(didFailed: error)
+                        return
+                    }
+                    
+                    guard let authResult = authResult else {
+                        return
+                    }
+                    
+                    self.signInFacebookDelegate?.smAuthProfileManagerSignInFacebook(didSuccess: authResult.user, accessToken: accessToken)
+                }
+            }
+        })
+    }
+    
+    func signOutFacebook() {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+    }
     
 }
 

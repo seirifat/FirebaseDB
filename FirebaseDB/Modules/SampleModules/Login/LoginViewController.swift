@@ -10,12 +10,20 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import SVProgressHUD
+import FacebookCore
+import FacebookLogin
 
 class LoginViewController: UIViewController {
 
     lazy var buttonLoginGoogle: SMButtonPrimary = {
         let buttonLogin = SMButtonPrimary()
         buttonLogin.setTitle("Login with Google", for: .normal)
+        return buttonLogin
+    }()
+    
+    lazy var buttonLoginFacebook: SMButtonPrimary = {
+        let buttonLogin = SMButtonPrimary()
+        buttonLogin.setTitle("Login with Facebook", for: .normal)
         return buttonLogin
     }()
     
@@ -49,10 +57,15 @@ class LoginViewController: UIViewController {
         stackViewContainer.addArrangedSubview(buttonLoginGoogle)
         view.addConstraintsWithFormat("V:[v0(50@999)]", views: buttonLoginGoogle)
         
+        stackViewContainer.addArrangedSubview(buttonLoginFacebook)
+        view.addConstraintsWithFormat("V:[v0(50@999)]", views: buttonLoginFacebook)
+        
         buttonLoginGoogle.addTarget(self, action: #selector(buttonLoginGooglePressed), for: .touchUpInside)
+        buttonLoginFacebook.addTarget(self, action: #selector(buttonLoginFacebookPressed), for: .touchUpInside)
         
         GIDSignIn.sharedInstance().uiDelegate = self
         userManager.signInGoogleDelegate = self
+        userManager.signInFacebookDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +106,11 @@ class LoginViewController: UIViewController {
         userManager.signInWithGoogleAndRegisterFirebaseAuth()
     }
     
+    @objc func buttonLoginFacebookPressed(_ sender: UIButton) {
+        SVProgressHUD.show()
+        userManager.signInWithFacebook(in: self)
+    }
+    
     func launchMainTabbar() {
         let tabBarController = MainTabBarController.instantiateNav()
         tabBarController.modalTransitionStyle = .crossDissolve
@@ -129,5 +147,20 @@ extension LoginViewController: SMAuthProfileManagerSignInGoogle {
     
     func smAuthProfileManagerSignInGoogle(didFailed error: Error) {
         SVProgressHUD.showError(withStatus: error.localizedDescription)
+    }
+}
+
+extension LoginViewController: SMAuthProfileManagerSignInFacebook {
+    func smAuthProfileManagerSignInFacebook(didSuccess user: User, accessToken: AccessToken) {
+        SVProgressHUD.dismiss()
+        launchMainTabbar()
+    }
+    
+    func smAuthProfileManagerSignInFacebook(didFailed error: Error) {
+        SVProgressHUD.showError(withStatus: error.localizedDescription)
+    }
+    
+    func smAuthProfileManagerSignInFacebook(didCancelled loginResult: LoginResult) {
+        SVProgressHUD.showError(withStatus: "Facebook login cancelled")
     }
 }

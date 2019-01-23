@@ -26,6 +26,12 @@
 				<string>com.googleusercontent.apps.198473885285-gnfsmimfp2hq3nupmmkn5nc6lc8rs465</string>
 			</array>
 		</dict>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb2151986081531554</string>
+            </array>
+        </dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -56,5 +62,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>FacebookAppID</key>
+    <string>2151986081531554</string>
+    <key>FacebookDisplayName</key>
+    <string>FirebaseDB</string>
 </dict>
 </plist>
