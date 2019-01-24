@@ -50,6 +50,7 @@ class LoginViewController: UIViewController {
         dbFirebase.settings = settings
         
         view.addSubview(stackViewContainer)
+        stackViewContainer.spacing = 16
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraintCenterY(view: stackViewContainer)
         view.addConstraintsWithFormat("H:|-[v0]-|", views: stackViewContainer)
@@ -71,8 +72,8 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        SVProgressHUD.show()
         if let user = userManager.getFirebaseUser() {
+            SVProgressHUD.show()
             dbFirebase.collection("users").document(user.uid).getDocument { [weak self] (document, error) in
                 if let document = document, document.exists {
 //                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -98,8 +99,6 @@ class LoginViewController: UIViewController {
                     })
                 }
             }
-        } else {
-            SVProgressHUD.dismiss()
         }
     }
     
