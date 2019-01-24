@@ -85,7 +85,7 @@ class NewsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.parent?.title = "News"
+        self.parent?.title = "ARTICLES"
         self.setSolidNavbarWith(color: UIColor(hexString: "#SMUITheme.primaryColor") ?? .blue)
     }
     

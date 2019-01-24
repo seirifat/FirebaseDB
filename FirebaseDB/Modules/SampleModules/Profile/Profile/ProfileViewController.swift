@@ -27,8 +27,8 @@ class ProfileViewController: SMCollectionViewController {
     
     var profileItems = [
         ProfileItem(tag: 1, imageProfile: #imageLiteral(resourceName: "ic_person"), title: "Edit Profile"),
-        ProfileItem(tag: 2, imageProfile: #imageLiteral(resourceName: "ic_file"), title: "Create File"),
-        ProfileItem(tag: 3, imageProfile: #imageLiteral(resourceName: "ic_folder"), title: "Browse Drive"),
+        ProfileItem(tag: 2, imageProfile: #imageLiteral(resourceName: "ic_file"), title: "Create Post"),
+        ProfileItem(tag: 3, imageProfile: #imageLiteral(resourceName: "ic_folder"), title: "My Posts"),
         ProfileItem(tag: 4, imageProfile: #imageLiteral(resourceName: "ic_close"), title: "Logout"),
     ]
     
@@ -52,7 +52,7 @@ class ProfileViewController: SMCollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.parent?.title = "Profile"
+        self.parent?.title = "PROFILE"
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.view.layoutIfNeeded()
         setupView()
