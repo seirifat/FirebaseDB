@@ -94,7 +94,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
             present(controller, animated: true, completion: nil)
         case 4:
             let alert = AlertHelper.createAlertDialog(title: "Logout", message: "Are you sure, You want to logout?", agreeText: "Yes", cancelText: "No", agreeHandler: { [weak self] (action) in
-                self?.userManager.logoutGoogle()
+                self?.userManager.signOut()
                 self?.dismiss(animated: true, completion: nil)
             }, cancelHandler: nil)
             present(alert, animated: true, completion: nil)
